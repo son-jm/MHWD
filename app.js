@@ -1,4 +1,5 @@
 /**
+ * 오타가 심함,,
  * Monster Hunter 게임의 몬스터 생성자 함수
  * @param {Object}config 몬스터 구성에 필요한 설정 객체
  */
