@@ -1,13 +1,24 @@
 import { rawListeners } from "process";
 
+//아래 주석도 뭐가 필요해서 쓴걸까?
+/**
+ * Monster Hunter 게임의 몬스터 생성자 함수
+ * @param {Object}config 몬스터 구성에 필요한 설정 객체
+ */
+
+//config이 무슨 뜻이지? 내가 이해 하기로는 매개변수 받은 것 같은데 다른게 있으면 알려줘으면해
 function Monster(config) {
-  //기본 정보
+  //||이걸 쓴 이유가 뭘까  내가 아는건 ||이건 or이라는 건데
+  //config.id 아니면 0을 넣는다? 이런 개념이야? 아니면 무슨 개념이야?
+  //그리고 this.이건 전걸? 밖에있는 위치를 가르킨다고 배웠는데 여기서 밖은 window만 있지 않아? 뭘 가르치는거야?
+  //"Unknown"이건 무슨 의미가 있는거야? 아직은 모른다는거 아냐? 다른 의미나 다른 쓰임세가 있으면 알려줘
   this.id = config.id || 0;
   this.name = config.name || "Unknown";
   this.species = config.species || "Unknown";
   this.classification = config.classification || "Unknown";
   this.title = config.title || "";
   this.description = config.description || "";
+  //사이즈를 정하는 부분 같은데 size뒤에 ? 이게 어떤 역활 한는거야?
   this.size = {
     average: config.size?.average || { length: 0, height: 0 },
     variation: config.size?.variation || { min: 0, max: 1.1 },
@@ -16,12 +27,10 @@ function Monster(config) {
       large: config.size?.crown?.large || 1.1,
     },
   };
-  //상태 정보
   this.stats = {
     health: {
       base: config.stats?.health?.base || 1000,
       modifier: {
-        //난이도별 체력 배율
         lowRank: config.stats?.health?.modifier?.lowRank || 1.0,
         highRank: config.stats?.health?.modifier?.highRank || 1.8,
         masterRank: config.stats?.health?.modifier?.masterRank || 3.2,
@@ -35,7 +44,6 @@ function Monster(config) {
     staggerThreshold: config.stats?.staggerThreshold || 150,
   };
 
-  //속성 및 상태이상
   this.elements = config.elements || [];
   this.ailments = config.ailments || [];
   this.resistances = {
@@ -55,7 +63,6 @@ function Monster(config) {
     },
   };
 
-  //약점(0~3, 수치가 높을수록 약점이 심함)
   this.weaknesses = {
     elements: config.weaknesses?.elements || {
       fire: 0,
@@ -71,7 +78,7 @@ function Monster(config) {
     },
   };
 
-  //신체 부위별 데미지 배율 및 체력
+  //예시가 있는데 []안에 쓰면 된다는거야? 무슨 의미인지 잘 모르겠어 뒤에 코드 보면 여러가지가 있긴한데 아직||이게 이해가 안되서 무슨 의미인지 모르겠어
   this.bodyParts =
     config.bodyParts ||
     [
@@ -101,7 +108,6 @@ function Monster(config) {
     },
   };
 
-  //특수 능력 및 공격
   this.abilities =
     config.abilities ||
     [
@@ -115,14 +121,12 @@ function Monster(config) {
     },
   };
 
-  //서식지 및 위치 정보
   this.habitats =
     config.habitats ||
     [
       //예시 {id: "ancient_forest", name: "고대수림", probability:0.8 areas :[1, 2, 3, 6, 8]}
     ];
 
-  //현제상태
   this.currentState = {
     health: this.stats.health.base,
     stamina: this.stats.stamina,
