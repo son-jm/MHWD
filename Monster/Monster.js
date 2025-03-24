@@ -99,7 +99,7 @@ function Monster(config) {
     fleeTreshold: config.behavior?.fleeTreshold || 0.15, //도주 시작 체력 비율 (기본 15%)
     naturalPreys: config.behavior?.naturalPreys || [], //자연스럽게 사냥 하는 몬스터
     naturalPredators: config.behavior?.naturalPredators || [], // 천적 몬스터
-    stateChangeThreHolds: config.behavior?.stateChangeThreHolds || {
+    stateChangeThresHolds: config.behavior?.stateChangeThresHolds || {
       enraged: 0.8, // 분노 산태 진입 체력 비율
       exhausted: 0.5, //탈진 상태 진입 체력 비율
       limping: 0.3, //절뚝임 상태 진입 체력 비율

@@ -104,7 +104,7 @@ function Monster(config) {
     fleeTreshold: config.behavior?.fleeTreshold || 0.15, //도주 시작 체력 비율 (기본 15%)
     naturalPreys: config.behavior?.naturalPreys || [], //자연스럽게 사냥 하는 몬스터
     naturalPredators: config.behavior?.naturalPredators || [], // 천적 몬스터
-    stateChangeThreHolds: config.behavior?.stateChangeThreHolds || {
+    stateChangeThresHolds: config.behavior?.stateChangeThresHolds || {
       enraged: 0.8, // 분노 산태 진입 체력 비율
       exhausted: 0.5, //탈진 상태 진입 체력 비율
       limping: 0.3, //절뚝임 상태 진입 체력 비율
@@ -151,12 +151,11 @@ function Monster(config) {
 
 Monster.prototype.takeDamage = function (
   amount,
-  damage,
   damageType,
   elementType,
-  bodyParts
+  bodyPartId
 ) {
-  let bodyPart = this.bodyParts.find((part) => part.id === bodyParld);
+  let bodyPart = this.bodyParts.find((part) => part.id === bodyPartId);
   let multiplier = 1.0;
 
   if (bodyPart) {
@@ -167,14 +166,14 @@ Monster.prototype.takeDamage = function (
     multiplier *= 1 + this.weaknesses.elements[elementType] * 0.1;
   }
 
-  const finlDamage = Math.floor(amount * multiplier);
-  this.currentState.health -= finalDamge;
+  const finalDamage = Math.floor(amount * multiplier);
+  this.currentState.health -= finalDamage;
 
   this.checkStateChanges();
 
   if (bodyPart) {
-    bodyPart.health -= finlDamage;
-    this.checkPartBreaks(bodyPartld);
+    bodyPart.health -= finalDamage;
+    this.checkPartBreaks(bodyPartId);
   }
   return finalDamge;
 };
@@ -193,7 +192,7 @@ Monster.prototype.checkStateChanges = function () {
   }
   if (
     !this.currentState.isLimpong &&
-    healthRatio <= this.behavior.stateChangeThreHolds.limping
+    healthRatio <= this.behavior.stateChangeThresHolds.limping
   ) {
     this.did();
   }
