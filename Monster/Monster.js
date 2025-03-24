@@ -1,5 +1,3 @@
-import { rawListeners } from "process";
-
 //아래 주석도 뭐가 필요해서 쓴걸까?
 /**
  * Monster Hunter 게임의 몬스터 생성자 함수

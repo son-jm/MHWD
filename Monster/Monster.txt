@@ -23,3 +23,6 @@ config.size?.average || { length: 0, height: 0 }
 이부분에서 size?은 config.size가 undefined나 null이 아니면 → .average를 읽고,
 그렇지 않으면 → 그냥 undefined를 반환한다.
 and 연산자 같은 느낌
+
+쉽게 생각하면 이함수는 객체를 생성할려고 만든건데 왜 class를 사용하지 않았을까?
+class로 리팩토링 해보면 좋을까? 아니면 다음 함수로 넘어가서 흐름을 알아가는게 좋을까?
